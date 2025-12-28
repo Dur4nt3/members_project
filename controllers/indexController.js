@@ -19,3 +19,7 @@ export async function controllerGetLogin(req, res) {
 export async function controllerGetSignup(req, res) {
     res.render('signup');
 }
+
+export async function controllerGetMemberAuth(req, res) {
+    res.render('memberAuth');
+}

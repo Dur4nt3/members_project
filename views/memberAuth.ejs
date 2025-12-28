@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/reset.css">
+    <link rel="stylesheet" href="/stylesheets/root.css">
+    <title>Authorize Account</title>
+</head>
+<body>
+
+    <h1 class="form-heading">Authorization</h1>
+
+    <form action="/member-auth" method="POST" class="authorization-form">
+        <div class="form-row">
+            <label for="key">Member/Admin Key</label>
+            <input type="password" name="key" id="key">
+        </div>
+
+        <button type="submit">Enter</button>
+    </form>
+
+    <div class="footer-buttons-cont">
+        <a href="/" class="home-button">
+            <img src="/media/house.svg" alt="go back to the homepage">
+        </a>
+    </div>
+</body>
+</html>
