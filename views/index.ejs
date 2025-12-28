@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/reset.css">
+    <link rel="stylesheet" href="/stylesheets/root.css">
+    <title>Message Board</title>
+</head>
+<body>
+
+    <% if (locals.posts.length === 0) { %>
+        <div class="no-messages-notice">
+            <img src="/media/message-circle-off.svg">
+            <h1>No Messages!</h1>
+            <p>
+                Be the first to
+                <a href="/create-message">CREATE</a>
+                one
+            </p>
+        </div>
+    <% } else { %>
+        <h1>Messages</h1>
+    <% } %>
+
+    <div class="footer-buttons-cont">
+        <% if (locals.authenticated === true) { %>
+            <% if (locals.member === true) { %>
+                <a href="/create-message" class="new-post-button">
+                    <img src="/media/plus.svg" alt="create a new post">
+                </a>
+            <% } else { %>
+                <a href="/member-auth" class="member-auth-button">
+                    <img src="/media/key-round.svg" alt="authenticate as a member">
+                </a>
+            <% } %>
+        <% } else { %>
+            <a href="/login" class="login-button">
+                <img src="/media/log-in.svg" alt="login">
+            </a>
+        <% } %>
+    </div>
+</body>
+</html>

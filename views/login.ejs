@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/reset.css">
+    <link rel="stylesheet" href="/stylesheets/root.css">
+    <title>Login</title>
+</head>
+<body>
+
+    <h1 class="form-heading">Login</h1>
+
+    <form action="/login" method="POST" class="login-form">
+        <div class="form-row">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username">
+        </div>
+
+        <div class="form-row">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+        </div>
+
+        <p>
+            New here?
+            <a href="/sign-up">Sign-Up!</a>
+        </p>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="footer-buttons-cont">
+        <a href="/" class="home-button">
+            <img src="/media/house.svg" alt="go back to the homepage">
+        </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+@font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-Italic-VariableFont_wght.ttf);
+    font-style: italic;
+}
+
+/* ----------------------- General Styles ----------------------- */
+
+:root {
+    --fs-sm: clamp(0.8rem, 0.15vi + 0.77rem, 0.89rem);
+    --fs-base: clamp(1rem, 0.31vi + 0.94rem, 1.19rem);
+    --fs-md: clamp(1.25rem, 0.55vi + 1.14rem, 1.58rem);
+    --fs-lg: clamp(1.56rem, 0.91vi + 1.38rem, 2.11rem);
+    --fs-xl: clamp(1.95rem, 1.43vi + 1.67rem, 2.81rem);
+    --fs-xxl: clamp(2.44rem, 2.18vi + 2.01rem, 3.75rem);
+    --fs-xxxl: clamp(3.05rem, 3.24vi + 2.4rem, 5rem);
+
+    --background-color: #101828;
+    --primary-color: #1e2939;
+    --text-color: #f7faff;
+
+    --input-border: #6a7282;
+    --input-background: rgba(54, 64, 83, 0.5);
+    --input-focus-border: #1068c7;
+
+    color-scheme: dark;
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--background-color);
+
+    font-family: Montserrat, system-ui, 'Trebuchet MS', 'Segoe UI', Roboto,
+        Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol';
+
+    min-height: 100svh;
+
+    padding: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+a {
+    color: #3EE4C2;
+}
+
+a:hover {
+    color: #5AF2D5;
+}
+
+.no-messages-notice,
+.not-found-notice {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.no-messages-notice > img {
+    width: 3rem;
+    height: 3rem;
+
+    margin-bottom: 0.75rem;
+}
+
+.no-messages-notice > h1 {
+    font-size: var(--fs-xl);
+    margin-bottom: 1rem;
+}
+
+.not-found-notice > h1 {
+    font-size: var(--fs-xxxl);
+    margin-bottom: 0.5rem;
+}
+
+.not-found-notice > h2 {
+    font-size: var(--fs-lg);
+    margin-bottom: 0.5rem;
+}
+
+.no-messages-notice a,
+.not-found-notice a {
+    font-style: italic;
+}
+
+.footer-buttons-cont {
+    margin-top: auto;
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 1.5rem;
+}
+
+.footer-buttons-cont > a {
+    display: grid;
+    place-items: center;
+
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top: auto;
+    margin-bottom: 0.5rem;
+
+    border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+    border: none;
+
+    background-color: var(--primary-color);
+
+    cursor: pointer;
+
+    transition: 0.2s ease-in-out;
+}
+
+.footer-buttons-cont > a:hover {
+    transform: translateY(-0.15rem);
+}
+
+/* ----------------------- General Styles ----------------------- */
+
+/* ----------------------- Form-Related Styles ----------------------- */
+
+.form-heading {
+    margin-top: 2rem;
+    font-size: var(--fs-xxl);
+}
+
+form {
+    min-width: 260px;
+
+    background-color: var(--primary-color);
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+
+    border-radius: 0.35rem;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    margin-bottom: 1rem;
+}
+
+input {
+    height: 2rem;
+
+    background-color: var(--input-background);
+    border: 1.5px solid var(--input-border);
+    border-radius: 0.25rem;
+
+    transition: 0.2s ease-in-out;
+}
+
+input:focus {
+    outline: none;
+    border: 1.5px solid var(--input-focus-border);
+}
+
+form > p {
+    font-style: italic;
+    font-size: var(--fs-sm);
+}
+
+form > button {
+    cursor: pointer;
+
+    height: 2rem;
+    border: none;
+    border-radius: 0.25rem;
+
+    margin-top: 0.5rem;
+
+    background-color: var(--input-focus-border);
+}
+
+@media (min-width: 40rem) {
+    form {
+        padding: 1rem;
+        min-width: 340px;
+    }
+
+    .form-row {
+        margin-bottom: 1.25rem;
+    }
+}
+
+/* ----------------------- Form-Related Styles ----------------------- */
