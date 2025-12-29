@@ -11,20 +11,22 @@
 
     <h1 class="form-heading">Sign-Up</h1>
 
+    <%- include("partials/errors.ejs", { errors: locals.errors }) %>
+
     <form action="/sign-up" method="POST" class="sign-up-form">
         <div class="form-row">
             <label for="username">Username</label>
-            <input type="text" name="username" id="username">
+            <input type="text" name="username" id="username" value="<%= locals.username !== undefined ? locals.username : '' %>">
         </div>
 
         <div class="form-row">
             <label for="fname">First Name</label>
-            <input type="text" name="fname" id="fname">
+            <input type="text" name="fname" id="fname" value="<%= locals.fname !== undefined ? locals.fname : '' %>">
         </div>
 
         <div class="form-row">
             <label for="lname">Last Name</label>
-            <input type="text" name="lname" id="lname">
+            <input type="text" name="lname" id="lname" value="<%= locals.lname !== undefined ? locals.lname : '' %>">
         </div>
 
         <div class="form-row">

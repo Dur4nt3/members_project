@@ -5,6 +5,8 @@ import {
     controllerGetLogin,
     controllerGetSignup,
     controllerGetMemberAuth,
+    controllerGetCreateMessage,
+    controllerPostSignUp
 } from '../controllers/indexController.js';
 
 const indexRouter = Router();
@@ -19,6 +21,10 @@ indexRouter.get('/sign-up', controllerGetSignup);
 
 indexRouter.get('/member-auth', controllerGetMemberAuth);
 
+indexRouter.get('/create-message', controllerGetCreateMessage);
+
 // ------------ POST ROUTES ------------
+
+indexRouter.post('/sign-up', controllerPostSignUp);
 
 export { indexRouter };
