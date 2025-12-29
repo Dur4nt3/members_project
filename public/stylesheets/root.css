@@ -182,7 +182,22 @@ input {
     transition: 0.2s ease-in-out;
 }
 
-input:focus {
+textarea {
+    min-height: 4rem;
+
+    /* Solution for browsers where "resize" isn't supported */
+    min-width: 100%;
+    max-width: calc(260px - (0.75rem * 2));
+
+    background-color: var(--input-background);
+    border: 1.5px solid var(--input-border);
+    border-radius: 0.25rem;
+
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus {
     outline: none;
     border: 1.5px solid var(--input-focus-border);
 }
@@ -244,6 +259,10 @@ form > button {
 .logout-notice {
     text-align: center;
     margin-bottom: 0.5rem;
+}
+
+.key-notice {
+    font-style: italic;
 }
 
 @media (min-width: 40rem) {

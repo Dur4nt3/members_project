@@ -39,3 +39,25 @@ export async function createUser(username, hashedPassword, fname, lname) {
         [username, hashedPassword, fname, lname],
     );
 }
+
+export async function provideMemberStatus(userId) {
+    await dbPool.query(
+        `
+        UPDATE users 
+        SET member = true
+        WHERE user_id = $1
+        `,
+        [userId],
+    );
+}
+
+export async function provideAdminStatus(userId) {
+    await dbPool.query(
+        `
+        UPDATE users 
+        SET member = true, admin = true
+        WHERE user_id = $1
+        `,
+        [userId],
+    );
+}

@@ -2,8 +2,17 @@ import passport from 'passport';
 import { validationResult, matchedData } from 'express-validator';
 
 import { generatePassword } from '../auth/passwordUtils.js';
-import { getAllPosts, createUser } from '../db/queries/indexQueries.js';
-import { validateSignUp } from './validationUtils.js';
+import {
+    getAllPosts,
+    createUser,
+    provideMemberStatus,
+    provideAdminStatus,
+} from '../db/queries/indexQueries.js';
+import {
+    validateSignUp,
+    validateMemberKey,
+    validateAdminKey,
+} from './validationUtils.js';
 
 // ------------ GET ROUTES ------------
 
@@ -43,6 +52,11 @@ export async function controllerGetSignup(req, res) {
 }
 
 export async function controllerGetMemberAuth(req, res) {
+    if (!req.isAuthenticated()) {
+        res.redirect('/login');
+        return;
+    }
+
     res.render('memberAuth');
 }
 
@@ -52,7 +66,7 @@ export async function controllerGetCreateMessage(req, res) {
         return;
     }
 
-    res.render('createMessage');
+    res.render('createMessage', { member: req.user.member });
 }
 
 export async function controllerGetLogout(req, res) {
@@ -109,12 +123,48 @@ export function controllerPostLogin(req, res) {
 }
 
 export function controllerPostLogout(req, res) {
+    if (!req.isAuthenticated()) {
+        return;
+    }
+
     req.logout((err) => {
         if (err) {
             console.log('Could not logout user: ', err);
             return;
         }
         res.redirect('/');
+    });
+}
+
+export async function controllerPostMemberAuth(req, res) {
+    if (!req.isAuthenticated()) {
+        return;
+    }
+
+    if (validateMemberKey(req.body.key)) {
+        if (req.user.member === true) {
+            res.redirect('/');
+            return;
+        }
+
+        await provideMemberStatus(req.user['user_id']);
+        res.redirect('/');
+        return;
+    }
+
+    if (validateAdminKey(req.body.key)) {
+        if (req.user.admin === true) {
+            res.redirect('/');
+            return;
+        }
+
+        await provideAdminStatus(req.user['user_id']);
+        res.redirect('/');
+        return;
+    }
+
+    res.render('memberAuth', {
+        errors: [{ msg: 'Incorrect member/admin key!' }],
     });
 }
 

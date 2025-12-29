@@ -11,6 +11,8 @@
 
     <h1 class="form-heading">Authorization</h1>
 
+    <%- include("partials/errors.ejs", { errors: locals.errors }) %>
+
     <form action="/member-auth" method="POST" class="authorization-form">
         <div class="form-row">
             <label for="key">Member/Admin Key</label>

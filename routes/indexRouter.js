@@ -10,6 +10,7 @@ import {
     controllerPostSignUp,
     controllerPostLogin,
     controllerPostLogout,
+    controllerPostMemberAuth,
 } from '../controllers/indexController.js';
 
 const indexRouter = Router();
@@ -35,5 +36,7 @@ indexRouter.post('/sign-up', controllerPostSignUp);
 indexRouter.post('/login', controllerPostLogin);
 
 indexRouter.post('/logout', controllerPostLogout);
+
+indexRouter.post('/member-auth', controllerPostMemberAuth);
 
 export { indexRouter };

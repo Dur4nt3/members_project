@@ -57,4 +57,12 @@ const validateSignUp = [
         }),
 ];
 
+export function validateMemberKey(key) {
+    return key === process.env.MEMBER_KEY;
+}
+
+export function validateAdminKey(key) {
+    return key === process.env.ADMIN_KEY;
+}
+
 export { validateSignUp };
