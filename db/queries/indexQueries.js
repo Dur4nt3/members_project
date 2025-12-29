@@ -1,7 +1,12 @@
 import dbPool from '../dbPool.js';
 
 export async function getAllPosts() {
-    const { rows } = await dbPool.query(`SELECT * FROM posts`);
+    const { rows } = await dbPool.query(`
+        SELECT users.user_id, users.first_name, users.last_name, posts.title, posts.body, posts.added
+        FROM posts
+        LEFT JOIN users
+        ON posts.user_id = users.user_id
+        `);
 
     return rows;
 }
@@ -59,5 +64,15 @@ export async function provideAdminStatus(userId) {
         WHERE user_id = $1
         `,
         [userId],
+    );
+}
+
+export async function createMessage(title, body, timestamp, userId) {
+    await dbPool.query(
+        `
+        INSERT INTO posts (title, body, added, user_id)
+        VALUES ($1, $2, $3, $4)
+        `,
+        [title, body, timestamp, userId],
     );
 }

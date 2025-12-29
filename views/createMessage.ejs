@@ -22,7 +22,7 @@
 
             <div class="form-row">
                 <label for="body">Post Body</label>
-                <textarea name="body" id="body" value="<%= locals.body !== undefined ? locals.body : '' %>"></textarea>
+                <textarea name="body" id="body" cols="1"><%= locals.body !== undefined ? locals.body : '' %></textarea>
             </div>
 
             <button type="submit">Post</button>

@@ -11,7 +11,9 @@
 
     <% if (locals.authenticated === true) { %>
         <div class="user-banner-cont">
-            @<%= username %>
+            <p>
+                @<%= username %> (<%= name %>)
+            </p>
         </div>
     <% } %>
 
@@ -27,6 +29,22 @@
         </div>
     <% } else { %>
         <h1>Messages</h1>
+        <div class="all-messages-cont">
+            <% for (const post of posts) { %>
+                <div class="message-cont">
+                    <% if (locals.member === true) { %>
+                        <h2>From: <%= post["first_name"] + " " + post["last_name"] %></h2>
+                    <% } %>
+
+                    <h3><%= post.title %></h3>
+                    <p class="message-body"><%= post.body %></p>
+
+                    <% if (locals.member === true) { %>
+                        <p class="message-time">@ <%= post.added.toString().split(' GMT')[0] %> UTC</p>
+                    <% } %>
+                    </div>
+            <% } %>
+        </div>
     <% } %>
 
     <div class="footer-buttons-cont">

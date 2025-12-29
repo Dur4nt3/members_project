@@ -7,11 +7,13 @@ import {
     createUser,
     provideMemberStatus,
     provideAdminStatus,
+    createMessage,
 } from '../db/queries/indexQueries.js';
 import {
     validateSignUp,
     validateMemberKey,
     validateAdminKey,
+    validatePost,
 } from './validationUtils.js';
 
 // ------------ GET ROUTES ------------
@@ -22,11 +24,13 @@ export async function controllerGetHome(req, res) {
     let member = false;
     let name = null;
     let username = null;
+    let userId = null;
 
     if (req.isAuthenticated()) {
         member = req.user.member;
         username = req.user.username;
         name = `${req.user['first_name']} ${req.user['last_name']}`;
+        userId = req.user["user_id"];
     }
 
     res.render('index', {
@@ -80,7 +84,6 @@ const controllerPostSignUp = [
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            console.log(errors);
             return res.status(400).render('signup', {
                 errors: errors.array(),
                 username: req.body.username,
@@ -168,4 +171,31 @@ export async function controllerPostMemberAuth(req, res) {
     });
 }
 
-export { controllerPostSignUp };
+const controllerPostCreateMessage = [
+    validatePost,
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            console.log(errors, req.body.body, req.body.title);
+            return res.status(400).render('createMessage', {
+                member: req.user.member,
+                errors: errors.array(),
+                title: req.body.title,
+                body: req.body.body,
+            });
+        }
+
+        const { title, body } = matchedData(req);
+
+        const currentTimestamp = new Date()
+            .toISOString()
+            .substring(0, 19)
+            .replace('T', ' ');
+
+        await createMessage(title, body, currentTimestamp, req.user['user_id']);
+
+        res.redirect('/');
+    },
+];
+
+export { controllerPostSignUp, controllerPostCreateMessage };

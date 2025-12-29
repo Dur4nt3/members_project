@@ -11,6 +11,7 @@ import {
     controllerPostLogin,
     controllerPostLogout,
     controllerPostMemberAuth,
+    controllerPostCreateMessage
 } from '../controllers/indexController.js';
 
 const indexRouter = Router();
@@ -38,5 +39,7 @@ indexRouter.post('/login', controllerPostLogin);
 indexRouter.post('/logout', controllerPostLogout);
 
 indexRouter.post('/member-auth', controllerPostMemberAuth);
+
+indexRouter.post('/create-message', controllerPostCreateMessage);
 
 export { indexRouter };
