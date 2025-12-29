@@ -18,6 +18,18 @@ export async function findUserByName(username) {
     return rows;
 }
 
+export async function findUserById(id) {
+    const { rows } = await dbPool.query(
+        `
+        SELECT * FROM users
+        WHERE user_id = $1
+        `,
+        [id],
+    );
+
+    return rows;
+}
+
 export async function createUser(username, hashedPassword, fname, lname) {
     await dbPool.query(
         `

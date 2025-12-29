@@ -9,6 +9,12 @@
 </head>
 <body>
 
+    <% if (locals.authenticated === true) { %>
+        <div class="user-banner-cont">
+            @<%= username %>
+        </div>
+    <% } %>
+
     <% if (locals.posts.length === 0) { %>
         <div class="no-messages-notice">
             <img src="/media/message-circle-off.svg">
@@ -26,10 +32,16 @@
     <div class="footer-buttons-cont">
         <% if (locals.authenticated === true) { %>
             <% if (locals.member === true) { %>
+                <a href="/logout" class="logout-button">
+                    <img src="/media/log-out.svg" alt="logout">
+                </a>
                 <a href="/create-message" class="new-post-button">
                     <img src="/media/plus.svg" alt="create a new post">
                 </a>
             <% } else { %>
+                <a href="/logout" class="logout-button">
+                    <img src="/media/log-out.svg" alt="logout">
+                </a>
                 <a href="/member-auth" class="member-auth-button">
                     <img src="/media/key-round.svg" alt="authenticate as a member">
                 </a>

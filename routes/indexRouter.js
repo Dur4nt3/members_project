@@ -6,7 +6,10 @@ import {
     controllerGetSignup,
     controllerGetMemberAuth,
     controllerGetCreateMessage,
-    controllerPostSignUp
+    controllerGetLogout,
+    controllerPostSignUp,
+    controllerPostLogin,
+    controllerPostLogout,
 } from '../controllers/indexController.js';
 
 const indexRouter = Router();
@@ -15,9 +18,11 @@ const indexRouter = Router();
 
 indexRouter.get('/', controllerGetHome);
 
+indexRouter.get('/sign-up', controllerGetSignup);
+
 indexRouter.get('/login', controllerGetLogin);
 
-indexRouter.get('/sign-up', controllerGetSignup);
+indexRouter.get('/logout', controllerGetLogout);
 
 indexRouter.get('/member-auth', controllerGetMemberAuth);
 
@@ -26,5 +31,9 @@ indexRouter.get('/create-message', controllerGetCreateMessage);
 // ------------ POST ROUTES ------------
 
 indexRouter.post('/sign-up', controllerPostSignUp);
+
+indexRouter.post('/login', controllerPostLogin);
+
+indexRouter.post('/logout', controllerPostLogout);
 
 export { indexRouter };
