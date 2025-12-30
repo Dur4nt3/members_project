@@ -7,11 +7,13 @@ import {
     controllerGetMemberAuth,
     controllerGetCreateMessage,
     controllerGetLogout,
+    controllerGetDeleteMessage,
     controllerPostSignUp,
     controllerPostLogin,
     controllerPostLogout,
     controllerPostMemberAuth,
-    controllerPostCreateMessage
+    controllerPostCreateMessage,
+    controllerPostDeleteMessage,
 } from '../controllers/indexController.js';
 
 const indexRouter = Router();
@@ -30,6 +32,8 @@ indexRouter.get('/member-auth', controllerGetMemberAuth);
 
 indexRouter.get('/create-message', controllerGetCreateMessage);
 
+indexRouter.get('/delete-message/:postId', controllerGetDeleteMessage);
+
 // ------------ POST ROUTES ------------
 
 indexRouter.post('/sign-up', controllerPostSignUp);
@@ -41,5 +45,7 @@ indexRouter.post('/logout', controllerPostLogout);
 indexRouter.post('/member-auth', controllerPostMemberAuth);
 
 indexRouter.post('/create-message', controllerPostCreateMessage);
+
+indexRouter.post('/delete-message/:postId', controllerPostDeleteMessage);
 
 export { indexRouter };

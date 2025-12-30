@@ -5,7 +5,6 @@ const emptyErr = 'must not be empty';
 const lengthErr = 'must be between 1 and 75 characters';
 const bodyLengthErr = 'must be between 1 and 1000 characters';
 const alphaErr = 'must only contain letters';
-const specialCharErr = `Only letters, numbers and white spaces are allowed`;
 
 const validateSignUp = [
     body('username')
@@ -72,18 +71,12 @@ const validatePost = [
         .notEmpty()
         .withMessage(`Title ${emptyErr}`)
         .bail()
-        .matches(/^[a-zA-Z0-9? ]+$/)
-        .withMessage(`${specialCharErr} within the title`)
-        .bail()
         .isLength({ min: 1, max: 75 })
         .withMessage(`Title ${lengthErr}`),
 
     body('body')
         .notEmpty()
         .withMessage(`Body ${emptyErr}`)
-        .bail()
-        .matches(/^[a-zA-Z0-9\S\s]+$/)
-        .withMessage(`${specialCharErr} within the body`)
         .bail()
         .isLength({ min: 1, max: 1000 })
         .withMessage(`Body ${bodyLengthErr}`),

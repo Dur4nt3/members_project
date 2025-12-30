@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/reset.css">
+    <link rel="stylesheet" href="/stylesheets/root.css">
+    <title>Delete Message</title>
+</head>
+<body>
+
+    <h1 class="form-heading">Delete</h1>
+
+    <%- include("partials/errors.ejs", { errors: locals.errors }) %>
+
+    <% if (locals.authenticated === true) { %>
+        <% if (locals.post.length !== 0) { %>
+            <form action=<%= `/delete-message/${post[0]["post_id"]}` %> method="POST" class="delete-message-form">
+                <p class="delete-notice">
+                    You will delete the message titled:
+                </p>
+
+                <p class="delete-title"><%= post[0].title %></p>
+
+                <button type="submit">Delete</button>
+            </form>
+        <% } else { %>
+            <%- include("partials/errors.ejs", { errors: [{ msg: 'Message not found!'}] }) %>
+        <% } %>
+    <% } else { %>
+        <%- include("partials/errors.ejs", { errors: [{ msg: 'Login before attempting to delete a message!'}] }) %>
+    <% } %>
+
+    <div class="footer-buttons-cont">
+        <a href="/" class="home-button">
+            <img src="/media/house.svg" alt="go back to the homepage">
+        </a>
+    </div>
+</body>
+</html>

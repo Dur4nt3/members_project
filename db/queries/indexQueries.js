@@ -2,11 +2,23 @@ import dbPool from '../dbPool.js';
 
 export async function getAllPosts() {
     const { rows } = await dbPool.query(`
-        SELECT users.user_id, users.first_name, users.last_name, posts.title, posts.body, posts.added
+        SELECT users.user_id, users.first_name, users.last_name, posts.post_id, posts.title, posts.body, posts.added
         FROM posts
         LEFT JOIN users
         ON posts.user_id = users.user_id
         `);
+
+    return rows;
+}
+
+export async function getPostById(postId) {
+    const { rows } = await dbPool.query(
+        `
+        SELECT * FROM posts
+        WHERE post_id = $1
+        `,
+        [postId],
+    );
 
     return rows;
 }
@@ -74,5 +86,27 @@ export async function createMessage(title, body, timestamp, userId) {
         VALUES ($1, $2, $3, $4)
         `,
         [title, body, timestamp, userId],
+    );
+}
+
+export async function verifyPostOwnership(postId, userId) {
+    const { rows } = await dbPool.query(
+        `
+        SELECT * FROM posts
+        WHERE post_id = $1 AND user_id = $2
+        `,
+        [postId, userId],
+    );
+
+    return rows.length === 1;
+}
+
+export async function deletePost(postId) {
+    await dbPool.query(
+        `
+        DELETE FROM posts
+        WHERE post_id = $1
+        `,
+        [postId],
     );
 }

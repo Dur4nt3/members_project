@@ -8,6 +8,9 @@ import {
     provideMemberStatus,
     provideAdminStatus,
     createMessage,
+    getPostById,
+    verifyPostOwnership,
+    deletePost,
 } from '../db/queries/indexQueries.js';
 import {
     validateSignUp,
@@ -22,21 +25,25 @@ export async function controllerGetHome(req, res) {
     const posts = await getAllPosts();
 
     let member = false;
-    let name = null;
-    let username = null;
+    let admin = false;
     let userId = null;
+    let username = null;
+    let name = null;
 
     if (req.isAuthenticated()) {
         member = req.user.member;
+        admin = req.user.admin;
+        userId = req.user['user_id'];
         username = req.user.username;
         name = `${req.user['first_name']} ${req.user['last_name']}`;
-        userId = req.user["user_id"];
     }
 
     res.render('index', {
         posts,
         authenticated: req.isAuthenticated(),
         member,
+        admin,
+        userId,
         username,
         name,
     });
@@ -75,6 +82,12 @@ export async function controllerGetCreateMessage(req, res) {
 
 export async function controllerGetLogout(req, res) {
     res.render('logout', { authenticated: req.isAuthenticated() });
+}
+
+export async function controllerGetDeleteMessage(req, res) {
+    const post = await getPostById(req.params.postId);
+
+    res.render('deleteMessage', { post, authenticated: req.isAuthenticated() });
 }
 
 // ------------ POST ROUTES ------------
@@ -197,5 +210,32 @@ const controllerPostCreateMessage = [
         res.redirect('/');
     },
 ];
+
+export async function controllerPostDeleteMessage(req, res) {
+    let isPostOwner = false;
+
+    if (req.user.admin === true) {
+        isPostOwner = true;
+    } else {
+        isPostOwner = await verifyPostOwnership(
+            req.params.postId,
+            req.user['user_id'],
+        );
+    }
+
+    if (!isPostOwner) {
+        const post = await getPostById(req.params.postId);
+
+        res.render('deleteMessage', {
+            errors: [{ msg: 'You are not permitted to delete this message!' }],
+            post,
+            authenticated: req.isAuthenticated(),
+        });
+        return;
+    }
+
+    await deletePost(req.params.postId);
+    res.redirect('/');
+}
 
 export { controllerPostSignUp, controllerPostCreateMessage };

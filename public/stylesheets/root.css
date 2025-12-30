@@ -141,6 +141,25 @@ a:hover {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+
+    position: relative;
+}
+
+.delete-message-link {
+    background-color: rgba(255, 255, 255, 0.1);
+
+    padding: 0.15rem;
+    border-radius: 0.25rem;
+
+    position: absolute;
+    bottom: 0.25rem;
+    right: 0.25rem;
+
+    transition: 0.2s ease-in-out;
+}
+
+.delete-message-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 .message-cont > h2 {
@@ -157,6 +176,7 @@ a:hover {
 
 .message-cont > .message-time {
     margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
     font-size: var(--fs-sm);
     font-style: italic;
 }
@@ -271,6 +291,10 @@ form > button {
     margin-top: 0.5rem;
 
     background-color: var(--input-focus-border);
+}
+
+.delete-message-form > p {
+    text-align: center;
 }
 
 .errors-cont {
