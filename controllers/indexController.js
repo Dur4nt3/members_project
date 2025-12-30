@@ -189,7 +189,6 @@ const controllerPostCreateMessage = [
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            console.log(errors, req.body.body, req.body.title);
             return res.status(400).render('createMessage', {
                 member: req.user.member,
                 errors: errors.array(),

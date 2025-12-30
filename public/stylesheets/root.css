@@ -141,25 +141,28 @@ a:hover {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-
-    position: relative;
 }
 
 .delete-message-link {
-    background-color: rgba(255, 255, 255, 0.1);
-
-    padding: 0.15rem;
+    /* margin-top: auto; */
+    height: 2rem;
+    border: none;
     border-radius: 0.25rem;
 
-    position: absolute;
-    bottom: 0.25rem;
-    right: 0.25rem;
+    background-color: var(--input-focus-border);
+
+    text-decoration: none;
+    color: var(--text-color);
+
+    display: grid;
+    place-items: center;
 
     transition: 0.2s ease-in-out;
 }
 
 .delete-message-link:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--text-color);
+    filter: brightness(1.05);
 }
 
 .message-cont > h2 {
@@ -175,7 +178,7 @@ a:hover {
 }
 
 .message-cont > .message-time {
-    margin-top: 0.25rem;
+    margin-top: auto;
     margin-bottom: 0.25rem;
     font-size: var(--fs-sm);
     font-style: italic;
@@ -208,11 +211,41 @@ a:hover {
     .user-banner-cont {
         max-width: 300px;
     }
+
+    .message-cont {
+        max-width: 420px;
+    }
 }
 
 @media (min-width: 48rem) {
     .user-banner-cont {
         max-width: 340px;
+    }
+
+    .all-messages-cont {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-flow: row;
+    }
+
+    .message-cont {
+        max-width: 340px;
+    }
+}
+
+@media (min-width: 80rem) {
+    .all-messages-cont {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-auto-flow: row;
+    }
+}
+
+@media (min-width: 96rem) {
+    .all-messages-cont {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-auto-flow: row;
     }
 }
 

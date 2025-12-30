@@ -32,12 +32,6 @@
         <div class="all-messages-cont">
             <% for (const post of posts) { %>
                 <div class="message-cont">
-                    <% if ((locals.userId === post["user_id"]) || locals.admin === true) { %>
-                        <a class="delete-message-link" href=<%= `/delete-message/${post["post_id"]}` %>>
-                            <img src="/media/delete.svg" alt="delete message">
-                        </a>
-                    <% } %>
-
                     <% if (locals.member === true) { %>
                         <h2>From: <%= post["first_name"] + " " + post["last_name"] %></h2>
                     <% } %>
@@ -47,6 +41,12 @@
 
                     <% if (locals.member === true) { %>
                         <p class="message-time">@ <%= post.added.toString().split(' GMT')[0] %> UTC</p>
+                    <% } %>
+
+                    <% if ((locals.userId === post["user_id"]) || locals.admin === true) { %>
+                        <a class="delete-message-link" href=<%= `/delete-message/${post["post_id"]}` %>>
+                            <p>Delete</p>
+                        </a>
                     <% } %>
                     </div>
             <% } %>
